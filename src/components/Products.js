@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
 const productsArr = [
   {
@@ -20,25 +21,28 @@ const productsArr = [
     title: 'Blue Color',
     price: 100,
     imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
-  },
+  }
 ];
 
 function Products() {
+  const { addToCart } = useContext(CartContext);
+
   return (
-    <div className="container mt-4">
+    <div className="container mt-5">
       <div className="row">
         {productsArr.map((product, index) => (
-          <div className="col-md-3 mb-4" key={index}>
-            <div className="card h-100">
-              <img
-                src={product.imageUrl}
-                className="card-img-top"
-                alt={product.title}
-              />
+          <div className="col-md-3" key={index}>
+            <div className="card mb-4">
+              <img src={product.imageUrl} className="card-img-top" alt={product.title} />
               <div className="card-body">
                 <h5 className="card-title">{product.title}</h5>
                 <p className="card-text">${product.price}</p>
-                <button className="btn btn-primary">Add to Cart</button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => addToCart(product)}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           </div>

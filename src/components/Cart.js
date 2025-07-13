@@ -1,65 +1,59 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
-const cartElements = [
-  {
-    title: 'Colors',
-    price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-    quantity: 2,
-  },
-  {
-    title: 'Black and white Colors',
-    price: 50,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-    quantity: 3,
-  },
-  {
-    title: 'Yellow and Black Colors',
-    price: 70,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
-    quantity: 1,
-  },
-];
-
-function Cart({ show, onClose }) {
-  const [cartItems, setCartItems] = useState(cartElements);
-
-  const handleRemove = (index) => {
-    const updatedCart = cartItems.filter((item, i) => i !== index);
-    setCartItems(updatedCart);
-  };
-
-  if (!show) return null;
+function Cart({ onClose }) {
+  const { cartItems, removeFromCart } = useContext(CartContext);
 
   return (
-    <div
-      className="position-fixed top-0 end-0 bg-light p-3 border"
-      style={{ width: '300px', height: '100%', zIndex: 999 }}
-    >
-      <h4>Cart</h4>
-      <button className="btn-close" onClick={onClose}></button>
-      <ul className="list-group mt-3">
-        {cartItems.map((item, index) => (
-          <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
-            <div>
-              <img
-                src={item.imageUrl}
-                alt={item.title}
-                width="50"
-                className="me-2"
-              />
-              <div>{item.title}</div>
-              <div>Price: ${item.price}</div>
-              <div>Qty: {item.quantity}</div>
-            </div>
-            <button className="btn btn-danger btn-sm" onClick={() => handleRemove(index)}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div style={overlayStyles}>
+      <div style={cartStyles}>
+        <h2>Your Cart</h2>
+        {cartItems.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          <ul>
+            {cartItems.map((item, index) => (
+              <li key={index} style={{ marginBottom: '10px' }}>
+                <img src={item.imageUrl} alt={item.title} width="50" />
+                <span style={{ marginLeft: '10px' }}>{item.title}</span> - ₹{item.price} x {item.quantity}
+                <button
+                  className="btn btn-danger btn-sm"
+                  style={{ marginLeft: '10px' }}
+                  onClick={() => removeFromCart(item.title)}
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+        <button className="btn btn-secondary mt-3" onClick={onClose}>
+          Close
+        </button>
+      </div>
     </div>
   );
 }
+
+const overlayStyles = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100vw',
+  height: '100vh',
+  backgroundColor: 'rgba(0,0,0,0.5)',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex: 999,
+};
+
+const cartStyles = {
+  backgroundColor: '#fff',
+  padding: '30px',
+  borderRadius: '8px',
+  maxWidth: '500px',
+  width: '90%',
+};
 
 export default Cart;
