@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Products from './components/Products';
 import Cart from './components/Cart';
+import Products from './components/Products'; // Assuming Products is your Store
+import About from './components/About';
+import Home from './components/Home';
 
 function App() {
   const [showCart, setShowCart] = useState(false);
 
   const handleCartClick = () => {
-    setShowCart(true);
-  };
-
-  const handleCloseCart = () => {
-    setShowCart(false);
+    setShowCart(!showCart);
   };
 
   return (
-    <div>
+    <Router>
       <Header onCartClick={handleCartClick} />
-      {showCart && <Cart onClose={handleCloseCart} />}
-      <Products />
-    </div>
+      {showCart && <Cart />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/store" element={<Products />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
   );
 }
 
