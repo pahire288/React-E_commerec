@@ -1,15 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
 import Header from './components/Header';
-import Products from './components/Producr';
+import Products from './components/Products';
+import Cart from './components/Cart';
+
 
 function App() {
+  const [showCart, setShowCart] = useState(false);
+
+  const handleCartClick = () => {
+    setShowCart(true);
+  };
+
+  const handleCloseCart = () => {
+    setShowCart(false);
+  };
+
   return (
-   <>
-   
-   <Header />
-   <Products />
-   </>
+    <div>
+      <Header onCartClick={handleCartClick} />
+      <Products />
+      <Cart show={showCart} onClose={handleCloseCart} />
+    </div>
   );
 }
 

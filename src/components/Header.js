@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Header() {
+function Header({ onCartClick }) {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -40,7 +40,7 @@ function Header() {
               </li>
             </ul>
 
-            <button className="btn btn-outline-light">
+            <button className="btn btn-outline-light" onClick={onCartClick}>
               Cart <span className="badge bg-light text-dark">0</span>
             </button>
           </div>
