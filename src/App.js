@@ -6,11 +6,9 @@ import About from './components/About';
 import Products from './components/Products';
 import Cart from './components/Cart';
 import { CartProvider } from './context/CartContext';
-import ProductPage from './components/ProductPage'; // Import
-import Login from './pages/Login'; // ✅ added Login import
-import PrivateRoute from './PrivateRoute'; // ✅ import PrivateRoute
-
-
+import ProductPage from './components/ProductPage';
+import Login from './pages/Login';
+import PrivateRoute from './PrivateRoute';
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -25,11 +23,12 @@ function App() {
         {showCart && <Cart onClose={handleCloseCart} />}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/store" element={<Products />} />
           <Route path="/about" element={<About />} />
-          <Route path="/product/:id" element={<ProductPage />} /> {/* Add this */}
-                  <Route path="/login" element={<Login />} /> {/* ✅ added Login route */}
-                   <Route
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/login" element={<Login />} />
+          
+          {/* ✅ Protected /store route */}
+          <Route
             path="/store"
             element={
               <PrivateRoute>
@@ -37,7 +36,6 @@ function App() {
               </PrivateRoute>
             }
           />
-
         </Routes>
       </Router>
     </CartProvider>

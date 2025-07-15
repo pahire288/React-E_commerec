@@ -1,9 +1,16 @@
-// src/components/Cart.js
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 
 function Cart({ onClose }) {
   const { cartItems, removeFromCart } = useContext(CartContext);
+
+  const handleRemove = (item) => {
+    if (item._id) {
+      removeFromCart(item._id);
+    } else {
+      alert('Item ID missing, cannot remove');
+    }
+  };
 
   return (
     <div style={overlayStyles}>
@@ -12,15 +19,19 @@ function Cart({ onClose }) {
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
-          <ul>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
             {cartItems.map((item, index) => (
-              <li key={index} style={{ marginBottom: '10px' }}>
-                <img src={item.images[0]} alt={item.title} width="50" />
-                <span style={{ marginLeft: '10px' }}>{item.title}</span> - ₹{item.price} x {item.quantity}
+              <li key={index} style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
+                {item.images && item.images[0] && (
+                  <img src={item.images[0]} alt={item.title} width="50" />
+                )}
+                <span style={{ marginLeft: '10px', flex: 1 }}>
+                  {item.title} - ₹{item.price}
+                  {item.quantity && <> x {item.quantity}</>}
+                </span>
                 <button
                   className="btn btn-danger btn-sm"
-                  style={{ marginLeft: '10px' }}
-                  onClick={() => removeFromCart(item.title)}
+                  onClick={() => handleRemove(item)}
                 >
                   Remove
                 </button>
