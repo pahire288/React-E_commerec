@@ -1,9 +1,9 @@
 // src/pages/Login.js
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { AuthContext } from '../context/AuthContext';
-
+import { auth } from '../firebase'; // ✅ import initialized auth
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -14,7 +14,6 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const auth = getAuth();
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);

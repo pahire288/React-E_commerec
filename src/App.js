@@ -8,6 +8,8 @@ import Cart from './components/Cart';
 import { CartProvider } from './context/CartContext';
 import ProductPage from './components/ProductPage'; // Import
 import Login from './pages/Login'; // ✅ added Login import
+import PrivateRoute from './PrivateRoute'; // ✅ import PrivateRoute
+
 
 
 function App() {
@@ -27,6 +29,14 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/product/:id" element={<ProductPage />} /> {/* Add this */}
                   <Route path="/login" element={<Login />} /> {/* ✅ added Login route */}
+                   <Route
+            path="/store"
+            element={
+              <PrivateRoute>
+                <Products />
+              </PrivateRoute>
+            }
+          />
 
         </Routes>
       </Router>
