@@ -1,3 +1,4 @@
+// src/components/ContactUs.js
 import React, { useState } from 'react';
 
 function ContactUs() {
@@ -23,10 +24,7 @@ function ContactUs() {
         }
       });
 
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
-      }
-
+      if (!response.ok) throw new Error('Something went wrong!');
       alert('Contact details submitted successfully!');
       setFormData({ name: '', email: '', phone: '' });
     } catch (error) {

@@ -1,3 +1,4 @@
+// src/components/Header.js
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
@@ -14,6 +15,10 @@ function Header({ onCartClick }) {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/store">Store</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
+
+            {/* ✨ Add Login tab here */}
+            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+
             <Nav.Link as={Link} to="/contact">Contact Us</Nav.Link>
           </Nav>
           <Button variant="outline-light" onClick={onCartClick}>

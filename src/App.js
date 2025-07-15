@@ -7,6 +7,8 @@ import Products from './components/Products';
 import Cart from './components/Cart';
 import { CartProvider } from './context/CartContext';
 import ProductPage from './components/ProductPage'; // Import
+import Login from './pages/Login'; // ✅ added Login import
+
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -24,6 +26,8 @@ function App() {
           <Route path="/store" element={<Products />} />
           <Route path="/about" element={<About />} />
           <Route path="/product/:id" element={<ProductPage />} /> {/* Add this */}
+                  <Route path="/login" element={<Login />} /> {/* ✅ added Login route */}
+
         </Routes>
       </Router>
     </CartProvider>

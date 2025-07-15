@@ -1,3 +1,4 @@
+// src/components/Cart.js
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 
@@ -14,7 +15,7 @@ function Cart({ onClose }) {
           <ul>
             {cartItems.map((item, index) => (
               <li key={index} style={{ marginBottom: '10px' }}>
-                <img src={item.imageUrl} alt={item.title} width="50" />
+                <img src={item.images[0]} alt={item.title} width="50" />
                 <span style={{ marginLeft: '10px' }}>{item.title}</span> - ₹{item.price} x {item.quantity}
                 <button
                   className="btn btn-danger btn-sm"
